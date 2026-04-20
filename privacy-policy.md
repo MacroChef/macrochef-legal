@@ -12,9 +12,8 @@ MacroChef is a nutrition, meal planning, food logging, grocery, and AI-assisted 
 
 Contact:
 
-[your name or company name]  
-[your support email]  
-[your business address if applicable]
+[MacroChef]  
+[macrocheffounder@gmail.com]  
 
 If you are located in the European Economic Area, United Kingdom, or Switzerland, MacroChef is the data controller for personal information processed under this Privacy Policy unless stated otherwise.
 
@@ -217,7 +216,7 @@ California residents may have the right to:
 
 To exercise these rights, contact us at:
 
-[your support email]
+[macrocheffounder@gmail.com]
 
 We may need to verify your identity before completing a request.
 
@@ -236,7 +235,7 @@ Depending on your location, you may have the right to:
 
 To exercise these rights, contact us at:
 
-[your support email]
+[macrocheffounder@gmail.com]
 
 ## 11. Data Retention
 
