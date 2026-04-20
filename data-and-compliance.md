@@ -12,8 +12,8 @@ MacroChef is responsible for deciding how personal information is used for app f
 
 Contact:
 
-[your name or company name]  
-[your support email]
+[Macrochef]  
+[macrocheffounder@gmail.com]
 
 ## 2. Categories Of Data Processed
 
@@ -92,7 +92,7 @@ Users in applicable regions may request:
 
 Requests can be sent to:
 
-[your support email]
+[macrocheffounder@gmail.com]
 
 ## 7. CCPA/CPRA Compliance Summary
 
@@ -157,7 +157,7 @@ Retention may depend on:
 
 Users may request account or data deletion by contacting:
 
-[your support email]
+[macrocheffounder@gmail.com]
 
 Some information may be retained where required for legal, fraud prevention, tax, accounting, security, or legitimate business purposes.
 
