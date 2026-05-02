@@ -48,4 +48,4 @@ This may be caused by a temporary network issue or delayed refresh. Try reopenin
 ### How do I request account deletion?
 Email support@macromeal.app from the email associated with your MacroMeal account and request deletion.
 
-## Legal Links
+
