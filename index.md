@@ -11,7 +11,7 @@ Need help with MacroMeal? We can help with account access, subscriptions, meal l
 
 ## Contact Support
 
-**Email:** support@macromeal.app  
+**Email:** macrocheffounder@gmail.com 
 **Response time:** Usually within 1–2 business days
 
 If you contact support, include:
@@ -49,7 +49,3 @@ This may be caused by a temporary network issue or delayed refresh. Try reopenin
 Email support@macromeal.app from the email associated with your MacroMeal account and request deletion.
 
 ## Legal Links
-
-- [Privacy Policy](https://macromeal.app/privacy)
-- [Terms of Use](https://macromeal.app/terms)
-- [Data & AI Notice](https://macromeal.app/data-notice)
