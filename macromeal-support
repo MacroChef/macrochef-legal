@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MacroMeal Support</title>
+  <meta
+    name="description"
+    content="MacroMeal support for account help, subscriptions, meal logging, goals, syncing, and privacy."
+  />
+  <style>
+    :root {
+      --bg-top: #04110d;
+      --bg-bottom: #0c2119;
+      --card: rgba(19, 42, 34, 0.72);
+      --card-strong: rgba(28, 58, 47, 0.92);
+      --text: #f5fbf7;
+      --muted: #b7ccc2;
+      --accent: #8ef0ad;
+      --accent-deep: #3b9c69;
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+      --radius: 24px;
+      --max: 1080px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(142, 240, 173, 0.16), transparent 28%),
+        radial-gradient(circle at top left, rgba(183, 204, 194, 0.08), transparent 24%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 88px 0 48px;
+    }
+
+    .hero-card,
+    .section-card,
+    .faq-item,
+    .contact-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .hero-card {
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(142, 240, 173, 0.12);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2.3rem, 5vw, 4.6rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      margin-bottom: 28px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      transition: transform 0.18s ease, opacity 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      color: #062015;
+      border: none;
+    }
+
+    .button-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    section {
+      padding: 18px 0 24px;
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: clamp(1.55rem, 3vw, 2.3rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-subtitle {
+      margin: 0 0 22px;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .help-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .help-card {
+      padding: 20px;
+      background: var(--card-strong);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+
+    .help-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .help-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 18px 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      color: var(--accent);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-item p {
+      margin: 0;
+      padding: 0 20px 20px;
+      color: var(--muted);
+    }
+
+    .contact-layout {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1.05fr 1fr;
+    }
+
+    .contact-card {
+      padding: 24px;
+    }
+
+    .contact-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      margin-top: 0;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .meta-row {
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #9cb2a8;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .legal-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .legal-links a {
+      display: inline-flex;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+    }
+
+    footer {
+      padding: 20px 0 56px;
+    }
+
+    .footer-card {
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .footer-title {
+      margin: 0 0 6px;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .footer-copy {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 64px;
+      }
+
+      .hero-card {
+        padding: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="eyebrow">MacroMeal Support</div>
+        <h1>Help for your meals, macros, account, and subscription.</h1>
+        <p class="hero-copy">
+          Get support with sign in, billing, meal logging, goals, syncing, and general app issues.
+          If you need direct help, contact us and we’ll get back to you as soon as we can.
+        </p>
+        <div class="button-row">
+          <a class="button button-primary" href="mailto:support@macromeal.app">Contact Support</a>
+          <a class="button button-secondary" href="https://macromeal.app/privacy">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <h2 class="section-title">Quick Help</h2>
+        <p class="section-subtitle">
+          Start with the most common support categories.
+        </p>
+        <div class="grid help-grid">
+          <div class="help-card">
+            <h3>Account Access</h3>
+            <p>Help with sign in, password resets, account recovery, and session issues.</p>
+          </div>
+          <div class="help-card">
+            <h3>Subscriptions & Billing</h3>
+            <p>Support for renewals, purchase restoration, and active subscription access.</p>
+          </div>
+          <div class="help-card">
+            <h3>Food Logging</h3>
+            <p>Issues with manual logs, restaurant quick logs, scan flows, and daily entries.</p>
+          </div>
+          <div class="help-card">
+            <h3>Goals & Macros</h3>
+            <p>Questions about macro targets, goals, updates, and progress visibility.</p>
+          </div>
+          <div class="help-card">
+            <h3>Sync & Data</h3>
+            <p>Help with missing entries, delayed sync, or account data not appearing correctly.</p>
+          </div>
+          <div class="help-card">
+            <h3>Bugs & Feedback</h3>
+            <p>Report crashes, UI issues, broken flows, or feature requests.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">
+          Answers to the most common MacroMeal support questions.
+        </p>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>How do I reset my password?</summary>
+            <p>
+              Use the sign-in screen and follow the password reset flow associated with your account email.
+              If you still cannot access your account, contact support and include the email tied to your account.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Why is my subscription not showing up?</summary>
+            <p>
+              Make sure you are signed into the same Apple ID used to purchase the subscription. If access is still missing,
+              try restoring purchases. If the issue continues, contact support with the purchase date and account email.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I restore purchases?</summary>
+            <p>
+              Open the subscription or premium area in the app and use the restore purchases option. Restoration only works
+              for purchases tied to the same Apple ID originally used for the subscription.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I update my goals?</summary>
+            <p>
+              You can update your body stats, preferences, and macro-related settings from the app’s settings and profile areas.
+              If your goal numbers seem incorrect after an update, contact support with screenshots if possible.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Why are my meal logs not syncing?</summary>
+            <p>
+              This can happen because of a temporary network issue or a delayed backend refresh. Make sure your internet
+              connection is active, reopen the app, and try again. If logs still do not appear, contact support.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I contact support?</summary>
+            <p>
+              Email <a href="mailto:support@macromeal.app">support@macromeal.app</a>. Please include your device,
+              app issue, and any screenshots that help explain the problem.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>How do I request account deletion?</summary>
+            <p>
+              Email <a href="mailto:support@macromeal.app">support@macromeal.app</a> from the email address associated
+              with your account and request account deletion. Include enough identifying information for verification.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2 class="section-title">Contact Support</h2>
+        <p class="section-subtitle">
+          If you need direct help, send us a message.
+        </p>
+
+        <div class="contact-layout">
+          <div class="contact-card">
+            <h3>Direct Contact</h3>
+            <p>
+              The fastest way to reach us is by email.
+            </p>
+
+            <div class="meta-list">
+              <div class="meta-row">
+                <strong>Email:</strong>
+                <div><a href="mailto:support@macromeal.app">support@macromeal.app</a></div>
+              </div>
+              <div class="meta-row">
+                <strong>Response Time:</strong>
+                <div>Usually within 1–2 business days.</div>
+              </div>
+              <div class="meta-row">
+                <strong>Best Support Requests Include:</strong>
+                <div>Your account email, device model, issue details, and screenshots if available.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-card">
+            <h3>Send a Message</h3>
+            <p>
+              You can wire this form to Formspree, Basin, or any email form service later if you want.
+            </p>
+
+            <form>
+              <label>
+                Name
+                <input type="text" placeholder="Your name" />
+              </label>
+
+              <label>
+                Email
+                <input type="email" placeholder="you@example.com" />
+              </label>
+
+              <label>
+                Issue Type
+                <select>
+                  <option>Account Help</option>
+                  <option>Subscription & Billing</option>
+                  <option>Food Logging</option>
+                  <option>Meal Generation</option>
+                  <option>Bug Report</option>
+                  <option>Feedback</option>
+                  <option>Account Deletion</option>
+                </select>
+              </label>
+
+              <label>
+                Message
+                <textarea placeholder="Tell us what happened and how we can help."></textarea>
+              </label>
+
+              <button class="button button-primary" type="button">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2 class="section-title">Privacy & Legal</h2>
+        <p class="section-subtitle">
+          Review the policies related to MacroMeal.
+        </p>
+
+        <div class="legal-links">
+          <a href="https://macromeal.app/privacy">Privacy Policy</a>
+          <a href="https://macromeal.app/terms">Terms of Use</a>
+          <a href="https://macromeal.app/data-notice">Data & AI Notice</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-card">
+        <p class="footer-title">MacroMeal</p>
+        <p class="footer-copy">
+          Premium meal, macro, and nutrition support for users who want fast help and clear answers.
+        </p>
+        <div class="footer-links">
+          <a href="mailto:support@macromeal.app">Support</a>
+          <a href="https://macromeal.app/privacy">Privacy Policy</a>
+          <a href="https://macromeal.app/terms">Terms of Use</a>
+          <a href="https://macromeal.app/data-notice">Data & AI Notice</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
