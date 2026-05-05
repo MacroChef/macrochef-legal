@@ -8,7 +8,7 @@ By using MacroChef, you agree to these Terms.
 
 ## 1. Eligibility
 
-You must be at least 13 years old to use MacroChef. If you are under the age of majority in your location, you may use MacroChef only with permission from a parent or legal guardian.
+You must be at least 9 years old to use MacroChef. If you are under the age of majority in your location, you may use MacroChef only with permission from a parent or legal guardian.
 
 ## 2. What MacroChef Provides
 
@@ -148,7 +148,7 @@ Subscriptions are managed through your Apple ID account.
 
 ## 21. Governing Law
 
-These Terms are governed by the laws of [your state/country], without regard to conflict of law principles.
+These Terms are governed by the laws of [The United States], without regard to conflict of law principles.
 
 ## 22. Changes To These Terms
 
